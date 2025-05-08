@@ -1,36 +1,49 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour
 {
-    public TextAsset levelJson;  // gán JSON file ở Inspector
+    public TextAsset levelJson;  // Gán JSON file ở Inspector
     public GameObject boxNormalPrefab;
-    public float chieungang = 0f;
-    public float chieudoc = 0f;// khoảng cách giữa các ô
+    public float chieungang = 1f;  // Khoảng cách ngang giữa các ô
+    public float chieudoc = 1f;    // Khoảng cách dọc giữa các ô
 
     public Vector2 spawnPosition = new Vector2(0, 0);
+
+    private LevelData levelData;
+    private List<GameObject> spawnedBoxes = new List<GameObject>();
+
     void Start()
     {
-        LoadLevel();
+        LoadLevelFromJson();
+        InstantiateBoxes();
     }
 
-    void LoadLevel()
+    void LoadLevelFromJson()
     {
-        LevelData data = JsonUtility.FromJson<LevelData>(levelJson.text);
+        levelData = JsonUtility.FromJson<LevelData>(levelJson.text);
+    }
 
-        foreach (BoxData box in data.boxes)
+    void InstantiateBoxes()
+    {
+
+        
+        foreach (BoxData box in levelData.boxes)
         {
             Vector2 pos = new Vector2(
-                spawnPosition.x + (box.column - data.gridSize.columns / 2f) * chieungang,
-                spawnPosition.y - (box.row) * chieudoc
+                spawnPosition.x + (box.column - (levelData.gridSize.columns / 2f)) * chieungang,
+                spawnPosition.y - box.row * chieudoc
             );
 
             if (box.type == "normal")
             {
                 GameObject go = Instantiate(boxNormalPrefab, pos, Quaternion.identity);
                 go.GetComponent<Box>().SetHP(box.hp);
+                spawnedBoxes.Add(go);
             }
-
-            // sau này bạn xử lý thêm các loại khác ở đây
+            
         }
     }
+
+   
 }

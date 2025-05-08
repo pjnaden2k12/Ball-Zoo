@@ -1,5 +1,3 @@
-
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +6,11 @@ using UnityEngine.InputSystem;
 public class BallShooter : MonoBehaviour
 {
     public Ball ballPrefab;
-    public GameObject shootPointPrefab;
+    public Transform shootPoint;
     public int ballCount = 10;
     public float ballSpeed = 10f;
     public float delayBetweenShots = 0.1f;
+
     public AimPreview aimPreview;
 
     private List<Ball> activeBalls = new List<Ball>();
@@ -19,15 +18,6 @@ public class BallShooter : MonoBehaviour
     private bool isAiming = false;
 
     private Vector2 aimDirection;
-    private Vector3 currentShootPosition;
-    private GameObject currentShootPointObject;
-
-    private void Start()
-    {
-        // Create initial shoot point GameObject at current transform position
-        currentShootPosition = transform.position;
-        currentShootPointObject = Instantiate(shootPointPrefab, currentShootPosition, Quaternion.identity);
-    }
 
     void Update()
     {
@@ -39,8 +29,8 @@ public class BallShooter : MonoBehaviour
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
             worldPos.z = 0f;
 
-            aimDirection = (worldPos - currentShootPosition).normalized;
-            aimPreview.ShowDots(currentShootPosition, aimDirection);
+            aimDirection = (worldPos - shootPoint.position).normalized;
+            aimPreview.ShowDots(shootPoint.position, aimDirection);
             isAiming = true;
         }
         else if (isAiming)
@@ -58,14 +48,14 @@ public class BallShooter : MonoBehaviour
 
         for (int i = 0; i < ballCount; i++)
         {
-            Ball ball = Instantiate(ballPrefab, currentShootPosition, Quaternion.identity);
+            Ball ball = Instantiate(ballPrefab, shootPoint.position, Quaternion.identity);
             ball.Initialize(this);
             ball.Launch(direction * ballSpeed);
             activeBalls.Add(ball);
             yield return new WaitForSeconds(delayBetweenShots);
         }
 
-        // Wait until all balls are collected before allowing next shot
+        // Wait until all balls are collected and destroyed before allowing next shot
         while (activeBalls.Count > 0)
         {
             yield return null;
@@ -78,21 +68,10 @@ public class BallShooter : MonoBehaviour
     {
         if (!activeBalls.Contains(ball)) return;
 
-        // If it's the first ball hitting bottom this turn, update shoot position and recreate shoot point
-        if (currentShootPointObject == null || Vector3.Distance(ball.transform.position, currentShootPosition) > 0.1f)
-        {
-            if (currentShootPointObject != null)
-            {
-                Destroy(currentShootPointObject);
-            }
-            currentShootPosition = ball.transform.position;
-            currentShootPointObject = Instantiate(shootPointPrefab, currentShootPosition, Quaternion.identity);
-        }
-
-        StartCoroutine(MoveBallToPoint(ball, currentShootPosition));
+        StartCoroutine(MoveBallToPointAndDestroy(ball, shootPoint.position));
     }
 
-    private IEnumerator MoveBallToPoint(Ball ball, Vector3 point)
+    private IEnumerator MoveBallToPointAndDestroy(Ball ball, Vector3 point)
     {
         activeBalls.Remove(ball);
 
@@ -104,6 +83,8 @@ public class BallShooter : MonoBehaviour
             yield return null;
         }
         ball.transform.position = point;
+
+        Destroy(ball.gameObject);
     }
 }
 

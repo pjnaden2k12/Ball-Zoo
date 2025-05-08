@@ -9,9 +9,10 @@ public class Ball : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
-    // Initialize reference to BallShooter
+    // Khởi tạo tham chiếu tới BallShooter
     public void Initialize(BallShooter shooter)
     {
         ballShooter = shooter;
@@ -19,8 +20,8 @@ public class Ball : MonoBehaviour
 
     public void Launch(Vector2 velocity)
     {
-        rb.isKinematic = false;
-        rb.linearVelocity = velocity;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.linearVelocity = velocity; // sửa lại từ linearVelocity → velocity
         hasHitBottom = false;
     }
 
@@ -30,7 +31,7 @@ public class Ball : MonoBehaviour
         {
             hasHitBottom = true;
             rb.linearVelocity = Vector2.zero;
-            rb.isKinematic = true;
+            rb.bodyType = RigidbodyType2D.Kinematic;
             ballShooter?.OnBallHitBottom(this);
         }
     }
