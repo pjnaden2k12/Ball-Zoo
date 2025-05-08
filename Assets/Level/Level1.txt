@@ -1,0 +1,39 @@
+{
+  "level": 1,
+  "winCondition": {
+    "destroyAllBoxes": true,
+    "scoreTarget": 300
+  },
+  "gridSize": {
+    "rows": 9,
+    "columns": 11
+  },
+  "boxes": [
+    { "type": "normal", "hp": 2, "row": 0, "column": 2 },
+    { "type": "normal", "hp": 2, "row": 0, "column": 4 },
+    { "type": "normal", "hp": 2, "row": 0, "column": 6 },
+    { "type": "normal", "hp": 2, "row": 0, "column": 8 },
+    
+    { "type": "normal", "hp": 3, "row": 1, "column": 1 },
+    { "type": "normal", "hp": 3, "row": 1, "column": 3 },
+    { "type": "normal", "hp": 3, "row": 1, "column": 5 },
+    { "type": "normal", "hp": 3, "row": 1, "column": 7 },
+    { "type": "normal", "hp": 3, "row": 1, "column": 9 },
+
+    { "type": "normal", "hp": 4, "row": 2, "column": 2 },
+    { "type": "normal", "hp": 4, "row": 2, "column": 4 },
+    { "type": "normal", "hp": 4, "row": 2, "column": 6 },
+    { "type": "normal", "hp": 4, "row": 2, "column": 8 },
+
+    { "type": "normal", "hp": 3, "row": 3, "column": 3 },
+    { "type": "normal", "hp": 3, "row": 3, "column": 5 },
+    { "type": "normal", "hp": 3, "row": 3, "column": 7 },
+
+    { "type": "normal", "hp": 2, "row": 4, "column": 4 },
+    { "type": "normal", "hp": 2, "row": 4, "column": 6 },
+
+    { "type": "normal", "hp": 2, "row": 5, "column": 5 },
+
+    { "type": "normal", "hp": 1, "row": 6, "column": 5 }
+  ]
+}
