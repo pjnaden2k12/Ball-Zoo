@@ -5,6 +5,8 @@ public class Ball : MonoBehaviour
     private Rigidbody2D rb;
     private BallShooter ballShooter;
     private bool hasHitBottom = false;
+    public float damage = 1f; // mặc định mỗi viên đạn gây 1 sát thương
+
 
     private void Awake()
     {
@@ -33,6 +35,15 @@ public class Ball : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.bodyType = RigidbodyType2D.Kinematic;
             ballShooter?.OnBallHitBottom(this);
+        }
+        // Va chạm với Box
+        if (collision.collider.CompareTag("Block"))
+        {
+            Box box = collision.collider.GetComponent<Box>();
+            if (box != null)
+            {
+                box.TakeDamage(damage);
+            }
         }
     }
 }
