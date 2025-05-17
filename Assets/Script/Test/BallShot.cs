@@ -19,6 +19,9 @@ public class BallShooter : MonoBehaviour
 
     private Vector2 aimDirection;
 
+    // Khoảng cách dịch xuống theo trục Y (căn chỉnh với map bạn)
+    public float boxMoveDownDistance = 1f;
+
     void Update()
     {
         if (isShooting) return;
@@ -55,11 +58,14 @@ public class BallShooter : MonoBehaviour
             yield return new WaitForSeconds(delayBetweenShots);
         }
 
-        // Wait until all balls are collected and destroyed before allowing next shot
+        // Đợi tất cả ball thu về (danh sách activeBalls rỗng)
         while (activeBalls.Count > 0)
         {
             yield return null;
         }
+
+        // Tất cả ball đã thu lại, dịch các box xuống 1 hàng
+        ShiftBoxesDown();
 
         isShooting = false;
     }
@@ -86,5 +92,18 @@ public class BallShooter : MonoBehaviour
 
         Destroy(ball.gameObject);
     }
-}
 
+    // Hàm dịch tất cả box xuống 1 hàng
+    private void ShiftBoxesDown()
+    {
+        // Tìm tất cả box hiện tại trong scene
+        Box[] boxes = Object.FindObjectsByType<Box>(FindObjectsSortMode.None);
+
+        foreach (Box box in boxes)
+        {
+            Vector3 pos = box.transform.position;
+            pos.y -= boxMoveDownDistance;  // Dịch xuống theo trục Y
+            box.transform.position = pos;
+        }
+    }
+}

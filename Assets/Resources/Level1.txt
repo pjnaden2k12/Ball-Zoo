@@ -10,15 +10,15 @@
   },
   "boxes": [
     { "type": "normal", "hp": 2, "row": 0, "column": 2 },
-    { "type": "normal", "hp": 2, "row": 0, "column": 4 },
+    { "type": "boom", "hp": 2, "row": 0, "column": 4 },
     { "type": "normal", "hp": 2, "row": 0, "column": 6 },
     { "type": "normal", "hp": 2, "row": 0, "column": 8 },
     
     { "type": "normal", "hp": 3, "row": 1, "column": 1 },
-    { "type": "normal", "hp": 3, "row": 1, "column": 3 },
+    { "type": "boom", "hp": 3, "row": 1, "column": 3 },
     { "type": "normal", "hp": 3, "row": 1, "column": 5 },
     { "type": "normal", "hp": 3, "row": 1, "column": 7 },
-    { "type": "normal", "hp": 3, "row": 1, "column": 9 },
+    { "type": "boom", "hp": 3, "row": 1, "column": 9 },
 
     { "type": "normal", "hp": 4, "row": 2, "column": 2 },
     { "type": "normal", "hp": 4, "row": 2, "column": 4 },
@@ -27,7 +27,7 @@
 
     { "type": "normal", "hp": 3, "row": 3, "column": 3 },
     { "type": "normal", "hp": 3, "row": 3, "column": 5 },
-    { "type": "normal", "hp": 3, "row": 3, "column": 7 },
+    { "type": "boom", "hp": 3, "row": 3, "column": 7 },
 
     { "type": "normal", "hp": 2, "row": 4, "column": 4 },
     { "type": "normal", "hp": 2, "row": 4, "column": 6 },

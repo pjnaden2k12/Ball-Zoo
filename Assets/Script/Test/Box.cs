@@ -4,7 +4,7 @@ using TMPro;
 public class Box : MonoBehaviour
 {
     public int hp = 1;
-    public TextMesh text; // gán text con hiển thị HP (nếu có)
+    public TextMeshPro text; // hoặc TextMesh nếu dùng 3D Text
 
     public void SetHP(int value)
     {

@@ -3,12 +3,19 @@ using System.Collections.Generic;
 
 public class LevelLoader : MonoBehaviour
 {
-    public TextAsset levelJson;  // Gán JSON file ở Inspector
-    public GameObject boxNormalPrefab;
-    public float chieungang = 1f;  // Khoảng cách ngang giữa các ô
-    public float chieudoc = 1f;    // Khoảng cách dọc giữa các ô
-
+    public float chieungang = 1f;
+    public float chieudoc = 1f;
     public Vector2 spawnPosition = new Vector2(0, 0);
+
+    [System.Serializable]
+    public class BoxPrefabEntry
+    {
+        public string type;
+        public GameObject prefab;
+    }
+
+    public List<BoxPrefabEntry> boxPrefabs; // khai báo từ Inspector
+    private Dictionary<string, GameObject> prefabDict;
 
     private LevelData levelData;
     private List<GameObject> spawnedBoxes = new List<GameObject>();
@@ -16,18 +23,36 @@ public class LevelLoader : MonoBehaviour
     void Start()
     {
         LoadLevelFromJson();
+        BuildPrefabDict();
         InstantiateBoxes();
     }
 
     void LoadLevelFromJson()
     {
-        levelData = JsonUtility.FromJson<LevelData>(levelJson.text);
+        string levelFileName = LevelManager.SelectedLevelName;
+        TextAsset json = Resources.Load<TextAsset>(levelFileName);
+        if (json == null)
+        {
+            Debug.LogError("Không tìm thấy file JSON: " + levelFileName);
+            return;
+        }
+        levelData = JsonUtility.FromJson<LevelData>(json.text);
+    }
+
+    void BuildPrefabDict()
+    {
+        prefabDict = new Dictionary<string, GameObject>();
+        foreach (var entry in boxPrefabs)
+        {
+            if (!prefabDict.ContainsKey(entry.type))
+            {
+                prefabDict.Add(entry.type, entry.prefab);
+            }
+        }
     }
 
     void InstantiateBoxes()
     {
-
-        
         foreach (BoxData box in levelData.boxes)
         {
             Vector2 pos = new Vector2(
@@ -35,15 +60,16 @@ public class LevelLoader : MonoBehaviour
                 spawnPosition.y - box.row * chieudoc
             );
 
-            if (box.type == "normal")
+            if (prefabDict.TryGetValue(box.type, out GameObject prefab))
             {
-                GameObject go = Instantiate(boxNormalPrefab, pos, Quaternion.identity);
+                GameObject go = Instantiate(prefab, pos, Quaternion.identity);
                 go.GetComponent<Box>().SetHP(box.hp);
                 spawnedBoxes.Add(go);
             }
-            
+            else
+            {
+                Debug.LogWarning($"Không tìm thấy prefab cho type: {box.type}");
+            }
         }
     }
-
-   
 }
