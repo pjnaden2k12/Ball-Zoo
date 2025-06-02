@@ -9,6 +9,12 @@
     "columns": 11
   },
   "boxes": [
+    { "type": "normal", "hp": 3, "row": -1, "column": 1 },
+    { "type": "boom", "hp": 3, "row": -1, "column": 3 },
+    { "type": "normal", "hp": 3, "row": -1, "column": 5 },
+    { "type": "normal", "hp": 3, "row": -1, "column": 7 },
+    { "type": "boom", "hp": 3, "row": -1, "column": 9 },
+
     { "type": "normal", "hp": 2, "row": 0, "column": 2 },
     { "type": "boom", "hp": 2, "row": 0, "column": 4 },
     { "type": "normal", "hp": 2, "row": 0, "column": 6 },
