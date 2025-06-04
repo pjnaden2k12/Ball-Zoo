@@ -1,0 +1,19 @@
+{
+  "level": 1,
+  "winCondition": {
+    "destroyAllBoxes": true,
+    "scoreTarget": 300
+  },
+  "gridSize": {
+    "rows": 9,
+    "columns": 11
+  },
+  "boxes": [
+    { "type": "vip", "hp": 100, "row": 1, "column": 1 },
+    { "type": "vip", "hp": 3, "row": 1, "column": 3 },
+    { "type": "vip", "hp": 3, "row": 1, "column": 5 },
+    { "type": "normal", "hp": 3, "row": 1, "column": 7 },
+    { "type": "boom", "hp": 3, "row": 1, "column": 9 },
+
+  ]
+}
