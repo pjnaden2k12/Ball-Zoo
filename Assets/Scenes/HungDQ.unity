@@ -233,8 +233,8 @@ Transform:
   m_GameObject: {fileID: 393176570}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.34710002, y: 0.17690003, z: 0}
-  m_LocalScale: {x: 1, y: 1.1417911, z: 1}
+  m_LocalPosition: {x: 0.34710002, y: -0.1715, z: 0}
+  m_LocalScale: {x: 1, y: 1.2507466, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1708165726}
@@ -597,6 +597,7 @@ MonoBehaviour:
   ballSpeed: 6
   delayBetweenShots: 0.1
   aimPreview: {fileID: 893405346}
+  boxMoveDownDistance: 0.68
 --- !u!4 &752381888
 Transform:
   m_ObjectHideFlags: 0
@@ -606,7 +607,7 @@ Transform:
   m_GameObject: {fileID: 752381886}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -2.9, z: 0}
+  m_LocalPosition: {x: -0, y: -3.54, z: 0}
   m_LocalScale: {x: 0.03, y: 0.03, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -799,7 +800,7 @@ Transform:
   m_GameObject: {fileID: 1161765525}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -4.07, z: 0}
+  m_LocalPosition: {x: 0.03, y: -4.37, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -887,8 +888,8 @@ Transform:
   m_GameObject: {fileID: 1563728276}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.6866, y: -4.4503, z: 0}
-  m_LocalScale: {x: 5.788241, y: 2.0428643, z: 1}
+  m_LocalPosition: {x: -2.6866, y: -4.8, z: 0}
+  m_LocalScale: {x: 5.788241, y: 1.4390165, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1708165726}
@@ -1100,8 +1101,8 @@ Transform:
   m_GameObject: {fileID: 1614172421}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.6528997, y: 0.17690003, z: 0}
-  m_LocalScale: {x: 1, y: 1.1417911, z: 1}
+  m_LocalPosition: {x: -5.6528997, y: -0.2438, z: 0}
+  m_LocalScale: {x: 1, y: 1.2733194, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1708165726}
@@ -1286,11 +1287,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c617869541bea414ba08f21f34da1224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelJson: {fileID: 4900000, guid: 030a1e033ad151c4084472d440870a52, type: 3}
-  boxNormalPrefab: {fileID: 2208561412743229894, guid: 1d07a2e4892c6b14ca585f27465feba0, type: 3}
   chieungang: 0.62
   chieudoc: 0.72
   spawnPosition: {x: 0.31, y: 3.8}
+  boxPrefabs:
+  - type: normal
+    prefab: {fileID: 2208561412743229894, guid: 1d07a2e4892c6b14ca585f27465feba0, type: 3}
+  - type: boom
+    prefab: {fileID: 4726868021260501995, guid: 07a2de9855a13a74bba3ee98e84e4fcf, type: 3}
+  - type: mau
+    prefab: {fileID: 6991712637008333971, guid: 2990f03bc545e9346b7d2dd502bbfef5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
